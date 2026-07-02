@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --color-marble: #f6f4ef;
+  --color-marble-2: #edeae2;
+  --color-porcelain: #fffdf8;
+  --color-ink: #29241d;
+  --color-ink-2: #453d32;
+  --color-stone: #8d8477;
+  --color-gold: #a9834e;
+  --color-gold-2: #c8a86e;
+  --color-ember: #b4642f;
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Jost", "Avenir", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-marble);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-porcelain);
+}
+
+/* Thin luxury scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-marble);
+}
+::-webkit-scrollbar-thumb {
+  background: #d4cec2;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* Marble veining — soft blurred grey strokes tiled over warm white */
+.marble-bg {
+  background-color: var(--color-marble);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900'%3E%3Cdefs%3E%3Cfilter id='b' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='7'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='none' stroke='%23a39a8b' stroke-width='2' filter='url(%23b)' opacity='0.33'%3E%3Cpath d='M-60 180 C 160 90, 300 320, 520 240 S 880 140, 980 260'/%3E%3Cpath d='M-40 560 C 120 480, 260 640, 460 560 S 760 460, 960 600' opacity='0.7'/%3E%3Cpath d='M120 -40 C 200 160, 80 340, 220 520 S 320 780, 260 960' opacity='0.55'/%3E%3Cpath d='M640 -60 C 700 140, 560 300, 660 480 S 800 720, 720 940' opacity='0.45'/%3E%3C/g%3E%3Cg fill='none' stroke='%23c2b9a8' stroke-width='1' filter='url(%23b)' opacity='0.3'%3E%3Cpath d='M-80 340 C 180 260, 420 420, 640 340 S 900 280, 1000 380'/%3E%3Cpath d='M-60 760 C 200 680, 420 840, 660 740 S 900 660, 1000 780'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 900px 900px;
+}
+
+/* Subtle paper grain over the whole page */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.in-view {
+  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scaleY(1) translateX(0);
+    opacity: 0.95;
+  }
+  25% {
+    transform: scaleY(1.06) translateX(0.5px);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.94) translateX(-0.5px);
+    opacity: 0.85;
+  }
+  75% {
+    transform: scaleY(1.03) translateX(0.3px);
+    opacity: 0.95;
+  }
+}
+.animate-flicker {
+  animation: flicker 2.4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.animate-floaty {
+  animation: floaty 7s ease-in-out infinite;
+}
